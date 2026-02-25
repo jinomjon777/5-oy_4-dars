@@ -1,11 +1,27 @@
+const CustomErrorhandler = require("../error/custom-error.handler")
 const BookSchema = require("../schema/book.schema")
 const Book = require("../schema/book.schema")
 
 const getAllBook = async (req,res)=>{
 try{
-  const book=await BookSchema.find()
+  const book=await BookSchema.find().populate("authorInfo", "-_id fullName")
 
   res.status(200).json(book)
+}catch(error){
+  return res.status(500).json({
+    message: error.message
+  })
+}
+}
+
+const searchBook  = async (req,res)=>{
+try{
+  const {SearchingValue}=req.query
+  const result=await BookSchema.find({
+    title: { $regex: SearchingValue, $options: "i"}
+  })
+
+  res.status(200).json(result)
 }catch(error){
   return res.status(500).json({
     message: error.message
@@ -20,9 +36,7 @@ try{
   foundedBook=await BookSchema.findById(id)
 
   if(!foundedBook){
-    return res.status(404).json({
-      message: "Book not found"
-    })
+    throw CustomErrorhandler.NotFound("Book not found")
   }
 
   res.status(200).json(foundedBook)
@@ -35,9 +49,9 @@ try{
 
 const addBook = async (req,res)=>{
 try{
- const {title, peges, publishedYear, publishedHome, description, genre, imageURL}=req.body
+ const {title, peges, publishedYear, publishedHome, description, genre, imageURL,authorInfo}=req.body
 
- await BookSchema.create({title, peges, publishedYear, publishedHome, description, genre, imageURL})
+ await BookSchema.create({title, peges, publishedYear, publishedHome, description, genre, imageURL,authorInfo})
 
  res.status(201).json({
   message: "Added Book"
@@ -57,9 +71,7 @@ try{
   foundedBook=await BookSchema.findById(id)
 
   if(!foundedBook){
-    return res.status(404).json({
-      message: "Book nor found"
-    })
+    throw CustomErrorhandler.NotFound("Book not found")
   }
 
   await BookSchema.findByIdAndUpdate(id, {title, peges, publishedYear, publishedHome, description, genre, imageURL})
@@ -81,9 +93,7 @@ try{
   foundedBook=await BookSchema.findById(id)
 
   if(!foundedBook){
-    return res.status(404).json({
-      message: "Book nor found"
-    })
+    throw CustomErrorhandler.NotFound("Book not found")
   }
 
   await BookSchema.findByIdAndDelete(id)
@@ -104,6 +114,7 @@ module.exports={
   getOneBook,
   addBook,
   updateBook,
-  deleteBook
+  deleteBook,
+  searchBook
 }
  
