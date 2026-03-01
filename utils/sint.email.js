@@ -15,7 +15,7 @@ async function sendMessage(code, email) {
       subject: "Lesson",
       from: "ijumanazarov631@gmail.com",
       to: email,
-      text: `
+      html: `
 <!DOCTYPE html>
 <html lang="uz">
 <head>
@@ -64,9 +64,9 @@ async function sendMessage(code, email) {
                     </div>
 
                     <div style="margin-top:12px;font-size:12px;line-height:18px;color:#94a3b8;">
-                      Kod 10 daqiqa ichida amal qiladi.
+                      Kod 2 daqiqa ichida amal qiladi.
                       <br/>
-                      Agar bu siz bo‘lmasangiz, xabarni e’tiborsiz qoldiring.
+                      Agar bu siz bo'lmasangiz, xabarni e’tiborsiz qoldiring.
                     </div>
                   </td>
                 </tr>

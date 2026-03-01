@@ -10,7 +10,7 @@ const Book = new Schema(
       maxlength: [200, "Kitob nomi juda uzun"],
     },
 
-    peges: {
+    pages: {
       type: Number,
       required: [true, "Sahifalar soni majburiy"],
       min: [1, "Sahifalar soni 1 dan kichik bo'lishi mumkin emas"],

@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken")
 
-const accses_token = (payload)=>{
+const access_token = (payload)=>{
   return jwt.sign(payload,process.env.SECRET_KEY, {expiresIn: "15m"})
 }
 
@@ -10,6 +10,6 @@ const refresh_token = (payload)=>{
 
 
 module.exports={
-  accses_token,
+  access_token,
   refresh_token
 }

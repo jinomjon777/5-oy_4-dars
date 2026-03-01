@@ -1,5 +1,4 @@
 const CustomErrorhandler = require("../error/custom-error.handler")
-const authorValidator = require("../validator/author.validate")
 const bookValidator = require("../validator/book.validator")
 
 module.exports = function(req,res,next){
@@ -7,7 +6,7 @@ module.exports = function(req,res,next){
 
   if(error){
     throw CustomErrorhandler.BadRequest(error.message)
-  }
+  } 
 
   next()
 }

@@ -29,10 +29,6 @@ const Auth = new Schema(
 
     role: {
       type: String,
-      enum: {
-        values: ["user", "admin"],
-        message: "Rol faqat user yoki admin bo'lishi mumkin",
-      },
       default: "user",
     },
 
@@ -45,6 +41,9 @@ const Auth = new Schema(
       type: Date,
       default: null,
     },
+    refresh_token:{
+      type:  String
+    }
   },
   {
     versionKey: false,
