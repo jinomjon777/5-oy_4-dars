@@ -1,3 +1,4 @@
+const { required } = require("joi");
 const { Schema, default: mongoose } = require("mongoose");
 
 const Book = new Schema(
@@ -76,6 +77,10 @@ const Book = new Schema(
       type: Schema.Types.ObjectId,
       ref: "author",
       required: true
+    },
+    audioUrl: {
+      type: String,
+      required: false
     }
   },
   { 

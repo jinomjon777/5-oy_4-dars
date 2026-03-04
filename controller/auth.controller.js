@@ -4,6 +4,7 @@ const sendMessage = require("../utils/sint.email")
 const AuthSchema = require("../schema/auth.schema")
 const {refresh_token, access_token } = require("../utils/jwt")
 
+
 const Register = async (req,res, next)=>{
   try{
     const {username,email,password} = req.body
@@ -141,8 +142,6 @@ const Logout = async (req,res, next)=>{
       })
 
       res.status(200).json({message: "Logged out"})
-
-
   }catch(error){
     next(error)
   }

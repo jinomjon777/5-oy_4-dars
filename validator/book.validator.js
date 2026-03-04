@@ -12,7 +12,7 @@ const bookValidator =(data)=>{
     genre: joi.string().required().valid("Romance","Comedy","Thriller","Horror","Action","Documantary","Science fiction","Fantasy",
           "History"),
     authorInfo: joi.string().required(),
-    imageUrl: joi.string().required()
+    imageURL: joi.string().required()
   })
 
   return schema.validate(data)

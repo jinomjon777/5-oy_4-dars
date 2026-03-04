@@ -1,4 +1,5 @@
 const { Schema, default: mongoose } = require("mongoose");
+const ProfileSchema = require("./profile.schema"); 
 
 const Auth = new Schema(
   {
@@ -41,9 +42,15 @@ const Auth = new Schema(
       type: Date,
       default: null,
     },
+
     refresh_token:{
-      type:  String
+      type: String
+    },
+    profile: {
+      type: ProfileSchema,
+      default: () => ({})
     }
+
   },
   {
     versionKey: false,
@@ -53,4 +60,4 @@ const Auth = new Schema(
 
 const AuthSchema = mongoose.model("auth", Auth);
 
-module.exports=AuthSchema
+module.exports = AuthSchema;
